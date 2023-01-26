@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:food_donation/utils/routes.dart';
-class POrderDetails extends StatelessWidget {
+
+import '../utils/Receiverpendingscreenarg.dart';
+class POrderDetails extends StatefulWidget {
   const POrderDetails({Key? key}) : super(key: key);
 
   @override
+  State<POrderDetails> createState() => _POrderDetailsState();
+}
+
+class _POrderDetailsState extends State<POrderDetails> {
+
+
+  @override
   Widget build(BuildContext context) {
+    final arggs= ModalRoute.of(context)!.settings.arguments as Receiverpendingscreenarg;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.cyan,
@@ -100,7 +110,7 @@ class POrderDetails extends StatelessWidget {
                            ),
                          ),
                          Text(
-                           "Non-Vegeterian",
+                           arggs.type,
                            style: TextStyle(
                              fontSize: 24,
                              color: Colors.black54,
@@ -131,7 +141,7 @@ class POrderDetails extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "Serves nearly 4",
+                            "Serves nearly ${arggs.serve}",
                             style: TextStyle(
                               fontSize: 24,
                               color: Colors.black54,
@@ -162,7 +172,7 @@ class POrderDetails extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "Biryani",
+                            arggs.decription,
                             style: TextStyle(
                               fontSize: 24,
                               color: Colors.black54,
@@ -193,7 +203,7 @@ class POrderDetails extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "Flatno,Road,Station,City,State-Pincode",
+                            arggs.address,
                             maxLines: 2,
                             style: TextStyle(
                               fontSize: 24,
@@ -226,7 +236,7 @@ class POrderDetails extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "01:26:34",
+                            arggs.date+", "+arggs.time,
                             style: TextStyle(
                               fontSize: 24,
                               color: Colors.black54,
