@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "226413977087",
+    "project_id": "food-drive-d3b9e",
+    "storage_bucket": "food-drive-d3b9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226413977087:android:91a7f3d3fbc586d69cdbca",
+        "android_client_info": {
+          "package_name": "com.example.food_donation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "226413977087-6f9v3lm06568t57qcpmhjd4cf214jlnc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBq93K6ekaXvEyX4VYDNbFu9xxBFK0NGho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "226413977087-6f9v3lm06568t57qcpmhjd4cf214jlnc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
