@@ -20,23 +20,61 @@ class _LoginpageDState extends State<LoginpageD> {
   Widget build(BuildContext context) {
     bool obs_text = true;
     final size = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Scaffold(
-        body:SafeArea(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_ios_new_outlined,
+            color: Colors.white,
+          ),
+          onPressed: (){
+            Navigator.pushNamed(context, MyRoutes.homeRoute);
+          },
+        ),
+        title: Center(
+          child: Text(
+            "Food Drive",
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
+        actions: [
+          Container(
+            child: IconButton(
+                onPressed: () {
+                  },
+                icon: Icon(
+                  Icons.logout,
+                  color: Colors.cyan,
+                )),
+          )
+        ],
+        elevation: 0,
+        backgroundColor: Colors.cyan,
+
+      ),
+      body:isLoading
+        ? Center(child: CircularProgressIndicator())
+      :Padding(
+        padding: EdgeInsets.all(15.0),
+        child: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(8,200, 8, 8),
+              padding: const EdgeInsets.all(38.0),
               child: Container(
                 child:Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-
-                    Text("Login",
-                      style:TextStyle(
-                        fontSize: 35,
-                        fontWeight: FontWeight.bold,
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Image.asset(
+                        "Assets/images/login.png",
+                        fit: BoxFit.fitHeight,
+                        height: 146,
                       ),
-                       ),
+                    ),
                     SizedBox(
                       height: 25,
                       width: 25,
@@ -45,9 +83,10 @@ class _LoginpageDState extends State<LoginpageD> {
                     TextField(
                       controller: _email,
                       decoration: InputDecoration(
-                        hintText: "Enter email",prefixIcon:Icon(
+                        hintText: "Enter email",
+                        prefixIcon:Icon(
                         CupertinoIcons.mail,
-                        color: Colors.black,
+                        color: Colors.cyan,
                       ),
                         labelText: "Email",
                       ),
@@ -62,7 +101,7 @@ class _LoginpageDState extends State<LoginpageD> {
                         hintText: "Enter password",
                         prefixIcon:Icon(
                         CupertinoIcons.padlock_solid,
-                        color: Colors.black,
+                        color: Colors.cyan,
                       ),
                         labelText: "Password",
                       ),
@@ -110,23 +149,25 @@ class _LoginpageDState extends State<LoginpageD> {
                       height: 25,
                       width: 25,
                     ),
-                    Text("Are you a new user ?",
-                      style:TextStyle(
-                        fontSize: 15,
-                        fontWeight:FontWeight.normal,
-                      ),
+                    //
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text("Don't have an account?"),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(context, MyRoutes.signupd);
+                            },
+                            child: Container(
+                                alignment: Alignment.center,
+                                child: Text("Sign Up",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.cyan,
+                                        fontWeight: FontWeight.bold)))),
+                      ],
                     ),
-                    ElevatedButton(
-                      style:ElevatedButton.styleFrom(
-                        primary: Colors.cyan,
-                        onPrimary:Colors.white,
-                        minimumSize: Size(100, 40),
-                      ),
-                      onPressed: ()=>{
-                        Navigator.pushNamed(context, MyRoutes.signupd)
-                      },
-                      child:Text('Signin'),
-                    ),
+
                   ],
                 ),
 

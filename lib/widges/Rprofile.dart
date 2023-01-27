@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../RecieverAuthentication/Receiver_Method.dart';
 class Rprofile extends StatefulWidget {
   const Rprofile({Key? key}) : super(key: key);
 
@@ -32,9 +34,11 @@ class _RprofileState extends State<Rprofile> {
               width: 95,
             ),
             IconButton(
-              onPressed:(){},
+              onPressed:(){
+                receiverlogOut(context);
+              },
               icon:Icon(
-                Icons.login_sharp,
+                Icons.logout_sharp,
                 size: 28,
                 color: Colors.white,
               ),

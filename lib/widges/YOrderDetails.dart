@@ -59,7 +59,7 @@ class _YOrderDetailsState extends State<YOrderDetails> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Individual",
+                        args.person,
                         style: TextStyle(
                             fontSize: 24,
                             color: Colors.cyan[50],
@@ -275,6 +275,7 @@ class _YOrderDetailsState extends State<YOrderDetails> {
                         "type": args.type,
                         "uid":args.duid,
                         "name":args.dname,
+                        "person":args.person
 
                       };
                       FirebaseFirestore.instance
@@ -302,6 +303,7 @@ class _YOrderDetailsState extends State<YOrderDetails> {
                           .where("date",isEqualTo: args.date)
                           .where("time",isEqualTo: args.time)
                           .where("serve",isEqualTo: args.serve)
+                          .where("person",isEqualTo: args.person)
                           .get()
                           .then((value){
                         id1=value.docs[0].id;
@@ -327,6 +329,7 @@ class _YOrderDetailsState extends State<YOrderDetails> {
                           .where("date",isEqualTo: args.date)
                           .where("time",isEqualTo: args.time)
                           .where("serve",isEqualTo: args.serve)
+                          .where("person",isEqualTo: args.person)
                           .get()
                           .then((value){
                         id2=value.docs[0].id;
@@ -378,6 +381,7 @@ class _YOrderDetailsState extends State<YOrderDetails> {
                         "dname":args.dname,
                         "ruid":_auth.currentUser!.uid,
                         "rname":_auth.currentUser!.displayName,
+                        "person":args.person
 
                       };
                       FirebaseFirestore.instance
@@ -407,6 +411,7 @@ class _YOrderDetailsState extends State<YOrderDetails> {
                           .where("date",isEqualTo: args.date)
                           .where("time",isEqualTo: args.time)
                           .where("serve",isEqualTo: args.serve)
+                          .where("person",isEqualTo: args.person)
                           .get()
                           .then((value){
                         id1=value.docs[0].id;
@@ -432,6 +437,7 @@ class _YOrderDetailsState extends State<YOrderDetails> {
                           .where("date",isEqualTo: args.date)
                           .where("time",isEqualTo: args.time)
                           .where("serve",isEqualTo: args.serve)
+                          .where("person",isEqualTo: args.person)
                           .get()
                           .then((value){
                         id2=value.docs[0].id;

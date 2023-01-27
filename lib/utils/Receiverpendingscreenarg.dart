@@ -8,7 +8,8 @@ class Receiverpendingscreenarg{
   late String type;
   late String uid;
    String name;
+   String person;
 
-  Receiverpendingscreenarg(this.address,this.date,this.decription,this.mobile,this.serve,this.time,this.type,this.uid,this.name);
+  Receiverpendingscreenarg(this.address,this.date,this.decription,this.mobile,this.serve,this.time,this.type,this.uid,this.name,this.person);
 
 }

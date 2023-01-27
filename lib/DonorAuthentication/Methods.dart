@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:food_donation/DonorAuthentication/donarLP.dart';
 
 Future<User?>dSignUp(String name,String address,String mobile,String email,String password,
-String confirmpassword)async {
+String confirmpassword,String dropdownValue)async {
   FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
   try {
@@ -24,6 +24,7 @@ String confirmpassword)async {
       "password": password,
       "confirmPasswaord": confirmpassword,
       "uid":_auth.currentUser!.uid,
+      "person":dropdownValue
 
 
     });

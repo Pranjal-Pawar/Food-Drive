@@ -64,7 +64,7 @@ class _POrderDetailsState extends State<POrderDetails> {
                   Row(
                     children: [
                       Text(
-                        "Individual",
+                        arggs.person,
                         style: TextStyle(
                             fontSize: 24,
                             color: Colors.cyan[50],
@@ -282,6 +282,7 @@ class _POrderDetailsState extends State<POrderDetails> {
                   .where("date",isEqualTo: arggs.date)
                   .where("time",isEqualTo: arggs.time)
                   .where("serve",isEqualTo: arggs.serve)
+                  .where("person",isEqualTo: arggs.person)
                   .get()
                   .then((value){
                     id1=value.docs[0].id;
@@ -303,6 +304,7 @@ class _POrderDetailsState extends State<POrderDetails> {
                       .where("date",isEqualTo: arggs.date)
                       .where("time",isEqualTo: arggs.time)
                       .where("serve",isEqualTo: arggs.serve)
+                      .where("person",isEqualTo: arggs.person)
                   .get()
                   .then((value){
                     id2=value.docs[0].id;
@@ -323,8 +325,10 @@ class _POrderDetailsState extends State<POrderDetails> {
                     "type": arggs.type,
                     "duid":arggs.uid,
                     "dname":arggs.name,
+                    "person":arggs.person,
                     "ruid":_auth.currentUser!.uid,
                     "rname":_auth.currentUser!.displayName,
+
 
                   };
 
@@ -344,6 +348,7 @@ class _POrderDetailsState extends State<POrderDetails> {
                     "type": arggs.type,
                     "duid":arggs.uid,
                     "dname":arggs.name,
+                    "person":arggs.person,
                     "ruid":_auth.currentUser!.uid,
                     "rname":_auth.currentUser!.displayName,
                   };

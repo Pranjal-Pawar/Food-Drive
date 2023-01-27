@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_donation/utils/routes.dart';
+
+import '../RecieverAuthentication/Receiver_Method.dart';
 class receiveropyionpg extends StatelessWidget {
   const receiveropyionpg({Key? key}) : super(key: key);
 
@@ -19,7 +21,9 @@ class receiveropyionpg extends StatelessWidget {
         actions: [
           Container(
             child: IconButton(
-              onPressed: (){},
+              onPressed: (){
+                receiverlogOut(context);
+              },
               icon: Icon(
                 Icons.logout,
                 color: Colors.white,

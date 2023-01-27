@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:food_donation/Orders/Yourorders.dart';
 import 'package:food_donation/widges/Yorders_widget.dart';
 
@@ -50,12 +51,13 @@ class _YordersState extends State<Yorders> {
                 String dname=(snapshot.data!as QuerySnapshot).docs[index]['dname'];
                 String ruid=(snapshot.data!as QuerySnapshot).docs[index]['ruid'];
                 String rname=(snapshot.data!as QuerySnapshot).docs[index]['rname'];
+                String person=(snapshot.data!as QuerySnapshot).docs[index]['person'];
 
                 return InkWell(
                   onTap: (){
                     Navigator.pushNamed(context, MyRoutes.YOrderDetails,
                     arguments: Receiverconfirmscreenarg(
-                      address,date,description,mobile,serve,time,type,duid,dname,ruid,rname
+                      address,date,description,mobile,serve,time,type,duid,dname,ruid,rname,person
                     ));
 
                   },
@@ -119,7 +121,7 @@ class _YordersState extends State<Yorders> {
                                 SizedBox(
                                   width: 10.0,
                                 ),
-                                Text("Individual",
+                                Text(person,
                                     textAlign: TextAlign.start,
                                     style:TextStyle(
                                       fontSize: 18,
@@ -151,6 +153,71 @@ class _YordersState extends State<Yorders> {
                                 ),
                               ],
                             ),
+                            Divider(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Container(
+                                  width: 140,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Colors.cyan,
+                                  ),
+                                  child:TextButton(
+
+                                      onPressed: () {},
+                                      child:Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.call_sharp,
+                                            color: Colors.white,
+                                            size: 20,
+                                          ),
+                                          SizedBox(width: 10),
+                                          Text(
+                                            'Call',
+                                            style: TextStyle(color: Colors.white, fontSize: 18),
+                                          ),
+                                        ],
+                                      )
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                  width: 140,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Colors.cyan,
+                                  ),
+                                  child:TextButton(
+                                      onPressed: ()
+                                        async {
+                                          await FlutterPhoneDirectCaller.callNumber(mobile);
+                                        },
+
+                                      child:Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.message_sharp,
+                                            color: Colors.white,
+                                            size: 20,
+                                          ),
+                                          SizedBox(width: 10),
+                                          Text(
+                                            'message',
+                                            style: TextStyle(color: Colors.white, fontSize: 18),
+                                          ),
+                                        ],
+                                      )
+                                  ),
+                                ),
+
+                              ],
+                            )
                           ],
                         ),
                       )

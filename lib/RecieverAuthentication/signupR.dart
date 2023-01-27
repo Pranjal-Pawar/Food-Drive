@@ -27,148 +27,185 @@ class _SignupRState extends State<SignupR> {
     bool obc_text=true;
     final size=MediaQuery.of(context).size;
     return Scaffold(
-        body: SafeArea(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios_outlined, color: Colors.white),
+              onPressed: () {
+                Navigator.pushNamed(context, MyRoutes.homeRoute);
+              }
+          ),
+          title: Center(
+              child: Text(
+                "Donor Drive",
+                style: TextStyle(color: Colors.white),
+              )),
+          actions: [
+            Container(
+              child: IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.logout,
+                    color: Colors.cyan,
+                  )),
+            )
+          ],
+          backgroundColor: Colors.cyan,
+        ),
+        body: isLoading
+        ?Center(child: Container(child: CircularProgressIndicator()))
+        :SafeArea(
           child: SingleChildScrollView(
-            child: Container(
-              padding:EdgeInsets.fromLTRB(8, 100, 8, 8),
-                child: Column(
-                  children: [
-                    // SizedBox(
-                    //   height: 20,
-                    //   width: 20,
-                    // ),
-                    Center(
-                      child: Text("Sign Up",
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Container(
+                padding:EdgeInsets.all(1),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Image.asset(
+                          "Assets/images/login.png",
+                          fit: BoxFit.fitHeight,
+                          height: 146,
+                        ),
+                      ),
+                      Center(
+                        child: Text("Sign Up",
 
-                        style:TextStyle(
-                          fontSize: 35,
-                          fontWeight:FontWeight.bold,
+                          style:TextStyle(
+                            fontSize: 35,
+                            fontWeight:FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                    TextField(
-                      controller: _name,
-                      decoration: InputDecoration(
-                        hintText: "Enter name",
-                        prefixIcon: Icon(
-                          CupertinoIcons.person,
-                          color:Colors.black,
+                      TextField(
+                        controller: _name,
+                        decoration: InputDecoration(
+                          hintText: "Enter name",
+                          prefixIcon: Icon(
+                            CupertinoIcons.person,
+                            color:Colors.cyan,
+                          ),
+                          labelText: "Name",
                         ),
-                        labelText: "Name",
-                      ),
 
-                    ),
-                    TextField(
-                      controller: _address,
-                      decoration: InputDecoration(
-                        hintText: "Enter Address",
-                        prefixIcon: Icon(
-                          Icons.addchart_sharp,
-                          color:Colors.black,
-                        ),
-                        labelText: "Address",
                       ),
-                      maxLines: 2,
-                    ),
-                    TextField(
-                      controller: _phnoneNo,
-                      decoration: InputDecoration(
-                        hintText: "Enter Phone number",
-                        prefixIcon: Icon(
-                          Icons.phone,
-                          color:Colors.black,
+                      TextField(
+                        controller: _address,
+                        decoration: InputDecoration(
+                          hintText: "Enter Address",
+                          prefixIcon: Icon(
+                            Icons.addchart_sharp,
+                            color:Colors.cyan,
+                          ),
+                          labelText: "Address",
                         ),
-                        labelText: "Mobile",
+                        maxLines: 2,
                       ),
-                      maxLines: 2,
-                    ),
-                    TextField(
-                      controller: _email,
-                      decoration: InputDecoration(
-                        hintText: "Enter email",
-                        prefixIcon: Icon(
-                          CupertinoIcons.mail,
-                          color:Colors.black,
+                      TextField(
+                        controller: _phnoneNo,
+                        decoration: InputDecoration(
+                          hintText: "Enter Phone number",
+                          prefixIcon: Icon(
+                            Icons.phone,
+                            color:Colors.cyan,
+                          ),
+                          labelText: "Mobile",
                         ),
-                        labelText: "Email",
+                        maxLines: 2,
                       ),
-                    ),
-                    TextField(
-                      controller: _password,
-                      decoration: InputDecoration(
-                        hintText: "Enter passwaord",
-                        prefixIcon: Icon(
-                          CupertinoIcons.padlock_solid,
-                          color:Colors.black,
+                      TextField(
+                        controller: _email,
+                        decoration: InputDecoration(
+                          hintText: "Enter email",
+                          prefixIcon: Icon(
+                            CupertinoIcons.mail,
+                            color:Colors.cyan,
+                          ),
+                          labelText: "Email",
                         ),
-                        labelText:"Password",
                       ),
-                    ),
-                    TextField(
-                      controller: _confirmPassword,
-                      decoration: InputDecoration(
-                        hintText: "rewrite password",
-                        prefixIcon: Icon(
-                          CupertinoIcons.lock_circle,
-                          color: Colors.black,
+                      TextField(
+                        controller: _password,
+                        decoration: InputDecoration(
+                          hintText: "Enter passwaord",
+                          prefixIcon: Icon(
+                            CupertinoIcons.padlock_solid,
+                            color:Colors.cyan,
+                          ),
+                          labelText:"Password",
                         ),
-                        labelText: "Confirmed Password",
                       ),
-                    ),
-                    SizedBox(
-                      height: 25,
-                      width: 25,
-                    ),
-                    ElevatedButton(
-                        style:ElevatedButton.styleFrom(
-                          primary:Colors.cyan,
-                          onPrimary: Colors.white,
-                          minimumSize: Size(100,40),
-                        ) ,
-                        onPressed:(){
-                          if(_name.text.isNotEmpty&&
-                              _address.text.isNotEmpty&&
-                              _phnoneNo.text.isNotEmpty&&
-                              _email.text.isNotEmpty&&
-                              _password.text.isNotEmpty&&
-                              _confirmPassword.text.isNotEmpty){
-                            setState(() {
-                              isLoading=true;
-                            });
+                      TextField(
+                        controller: _confirmPassword,
+                        decoration: InputDecoration(
+                          hintText: "rewrite password",
+                          prefixIcon: Icon(
+                            CupertinoIcons.lock_circle,
+                            color: Colors.cyan,
+                          ),
+                          labelText: "Confirmed Password",
+                        ),
+                      ),
+                      SizedBox(
+                        height: 25,
+                        width: 25,
+                      ),
+                      ElevatedButton(
+                          style:ElevatedButton.styleFrom(
+                            primary:Colors.cyan,
+                            onPrimary: Colors.white,
+                            minimumSize: Size(100,40),
+                          ) ,
+                          onPressed:(){
+                            if(_name.text.isNotEmpty&&
+                                _address.text.isNotEmpty&&
+                                _phnoneNo.text.isNotEmpty&&
+                                _email.text.isNotEmpty&&
+                                _password.text.isNotEmpty&&
+                                _confirmPassword.text.isNotEmpty){
+                              setState(() {
+                                isLoading=true;
+                              });
 
-                            ReceiversignUp(
-                                _name.text,
-                                _address.text,
-                                _phnoneNo.text,
-                                _email.text,
-                                _password.text,
-                                _confirmPassword.text)
-                                .then((user){
-                              if(user!=null){
-                                setState(() {
-                                  isLoading=false;
-                                });
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder:(_)=>receiveropyionpg()));
-                              }else{
-                                setState(() {
-                                  isLoading=false;
-                                });
-                              }
-                            });
-                          }else {
-                            print("please fill the form correctly");
-                          }
-                        },
-                        child:Text("SignUp")
-                    ),
-                  ],
+                              ReceiversignUp(
+                                  _name.text,
+                                  _address.text,
+                                  _phnoneNo.text,
+                                  _email.text,
+                                  _password.text,
+                                  _confirmPassword.text)
+                                  .then((user){
+                                if(user!=null){
+                                  setState(() {
+                                    isLoading=false;
+                                  });
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder:(_)=>receiveropyionpg()));
+                                }else{
+                                  setState(() {
+                                    isLoading=false;
+                                  });
+                                }
+                              });
+                            }else {
+                              print("please fill the form correctly");
+                            }
+                          },
+                          child:Text("SignUp")
+                      ),
+                    ],
 
-                ),
+                  ),
 
 
+              ),
             ),
           ),
         )

@@ -45,12 +45,13 @@ class _PendingordersState extends State<Pendingorders> {
               String type=(snapshot.data!as QuerySnapshot).docs[index]['type'];
               String uid=(snapshot.data!as QuerySnapshot).docs[index]['uid'];
               String name=(snapshot.data!as QuerySnapshot).docs[index]['name'];
+              String person=(snapshot.data!as QuerySnapshot).docs[index]['person'];
 
               return InkWell(
                 onTap: (){
                   Navigator.pushNamed(context, MyRoutes.POrderDetails,
                   arguments: Receiverpendingscreenarg(
-                    address,date,description,mobile,serve,time,type,uid,name
+                    address,date,description,mobile,serve,time,type,uid,name,person
                   ));
 
                 },
@@ -114,7 +115,7 @@ class _PendingordersState extends State<Pendingorders> {
                               SizedBox(
                                 width: 10.0,
                               ),
-                              Text("Individual",
+                              Text(person,
                                   textAlign: TextAlign.start,
                                   style:TextStyle(
                                     fontSize: 18,

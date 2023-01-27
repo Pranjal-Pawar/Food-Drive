@@ -38,7 +38,7 @@ class _DprofileState extends State<Dprofile> {
                   dLogOut(context);
                 },
                 icon:Icon(
-                  Icons.login_sharp,
+                  Icons.logout_sharp,
                   size: 28,
                   color: Colors.white,
                 ),
@@ -115,7 +115,7 @@ class _DprofileState extends State<Dprofile> {
                         ),
                         Center(
                           child: Text(
-                            "Caterer",
+                            snapshot.data!['person'],
                             style: TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.normal,
