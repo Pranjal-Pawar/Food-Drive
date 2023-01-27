@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:food_donation/utils/Receiverconfirmscreenarg.dart';
 class YOrderDetails extends StatefulWidget {
@@ -8,6 +10,7 @@ class YOrderDetails extends StatefulWidget {
 }
 
 class _YOrderDetailsState extends State<YOrderDetails> {
+  final FirebaseAuth _auth=FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     final args=ModalRoute.of(context)!.settings.arguments as Receiverconfirmscreenarg;
@@ -261,7 +264,81 @@ class _YOrderDetailsState extends State<YOrderDetails> {
                   color: Colors.red,
                 ),
                 child:TextButton(
-                    onPressed: () {},
+                    onPressed: ()async {
+                      Map<String,dynamic> map={
+                        "serve":args.serve,
+                        "mobile":args.mobile,
+                        "description":args.description,
+                        "address":args.address,
+                        "date":args.date,
+                        "time":args.time,
+                        "type": args.type,
+                        "uid":args.duid,
+                        "name":args.dname,
+
+                      };
+                      FirebaseFirestore.instance
+                          .collection('receiverpendinglist')
+                          .add(map);
+
+                      FirebaseFirestore.instance
+                          .collection("users")
+                          .doc(args.duid)
+                          .collection('donorpendinglist')
+                          .add(map);
+
+                      String id1;
+                      FirebaseFirestore.instance
+                          .collection("users")
+                          .doc(args.duid)
+                          .collection('donorconfirmlist')
+                          .where("duid",isEqualTo: args.duid)
+                          .where("ruid",isEqualTo: args.ruid)
+                          .where("dname",isEqualTo: args.dname)
+                          .where("rname",isEqualTo: args.rname)
+                          .where("mobile",isEqualTo: args.mobile)
+                          .where("type",isEqualTo: args.type)
+                          .where("description",isEqualTo: args.description)
+                          .where("date",isEqualTo: args.date)
+                          .where("time",isEqualTo: args.time)
+                          .where("serve",isEqualTo: args.serve)
+                          .get()
+                          .then((value){
+                        id1=value.docs[0].id;
+                        FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(args.duid)
+                            .collection('donorconfirmlist')
+                            .doc(id1)
+                            .delete();
+                      } );
+                      String id2;
+                      FirebaseFirestore.instance
+                          .collection("users")
+                          .doc(args.ruid)
+                          .collection('receiverconfirmlist')
+                          .where("duid",isEqualTo: args.duid)
+                          .where("ruid",isEqualTo: args.ruid)
+                          .where("dname",isEqualTo: args.dname)
+                          .where("rname",isEqualTo: args.rname)
+                          .where("mobile",isEqualTo: args.mobile)
+                          .where("type",isEqualTo: args.type)
+                          .where("description",isEqualTo: args.description)
+                          .where("date",isEqualTo: args.date)
+                          .where("time",isEqualTo: args.time)
+                          .where("serve",isEqualTo: args.serve)
+                          .get()
+                          .then((value){
+                        id2=value.docs[0].id;
+                        FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(args.ruid)
+                            .collection('receiverconfirmlist')
+                            .doc(id2)
+                            .delete();
+                      } );
+                      Navigator.pop(context);
+                    },
                     child:Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -288,7 +365,85 @@ class _YOrderDetailsState extends State<YOrderDetails> {
                   color: Colors.green,
                 ),
                 child:TextButton(
-                    onPressed: () {},
+                    onPressed: ()async {
+                      Map<String,dynamic> map={
+                        "serve":args.serve,
+                        "mobile":args.mobile,
+                        "description":args.description,
+                        "address":args.address,
+                        "date":args.date,
+                        "time":args.time,
+                        "type": args.type,
+                        "duid":args.duid,
+                        "dname":args.dname,
+                        "ruid":_auth.currentUser!.uid,
+                        "rname":_auth.currentUser!.displayName,
+
+                      };
+                      FirebaseFirestore.instance
+                      .collection("users")
+                      .doc(args.ruid)
+                      .collection('receiverhistorylist')
+                      .add(map);
+
+                      FirebaseFirestore.instance
+                      .collection("users")
+                      .doc(args.duid)
+                      .collection('donarhistorylist')
+                      .add(map);
+
+                      String id1;
+                      FirebaseFirestore.instance
+                          .collection("users")
+                          .doc(args.duid)
+                          .collection('donorconfirmlist')
+                          .where("duid",isEqualTo: args.duid)
+                          .where("ruid",isEqualTo: args.ruid)
+                          .where("dname",isEqualTo: args.dname)
+                          .where("rname",isEqualTo: args.rname)
+                          .where("mobile",isEqualTo: args.mobile)
+                          .where("type",isEqualTo: args.type)
+                          .where("description",isEqualTo: args.description)
+                          .where("date",isEqualTo: args.date)
+                          .where("time",isEqualTo: args.time)
+                          .where("serve",isEqualTo: args.serve)
+                          .get()
+                          .then((value){
+                        id1=value.docs[0].id;
+                        FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(args.duid)
+                            .collection('donorconfirmlist')
+                            .doc(id1)
+                            .delete();
+                      } );
+                      String id2;
+                      FirebaseFirestore.instance
+                          .collection("users")
+                          .doc(args.ruid)
+                          .collection('receiverconfirmlist')
+                          .where("duid",isEqualTo: args.duid)
+                          .where("ruid",isEqualTo: args.ruid)
+                          .where("dname",isEqualTo: args.dname)
+                          .where("rname",isEqualTo: args.rname)
+                          .where("mobile",isEqualTo: args.mobile)
+                          .where("type",isEqualTo: args.type)
+                          .where("description",isEqualTo: args.description)
+                          .where("date",isEqualTo: args.date)
+                          .where("time",isEqualTo: args.time)
+                          .where("serve",isEqualTo: args.serve)
+                          .get()
+                          .then((value){
+                        id2=value.docs[0].id;
+                        FirebaseFirestore.instance
+                            .collection('users')
+                            .doc(args.ruid)
+                            .collection('receiverconfirmlist')
+                            .doc(id2)
+                            .delete();
+                      } );
+                      Navigator.pop(context);
+                      },
                     child:Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[

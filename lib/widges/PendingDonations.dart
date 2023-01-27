@@ -129,7 +129,7 @@ class _PendingDonationsState extends State<PendingDonations> {
                                       fontWeight: FontWeight.bold
                                   ),
                                 ),
-                                Text(_map['decription'],
+                                Text(_map['description'],
                                     textAlign: TextAlign.start,
                                     style:TextStyle(
                                       fontSize: 18,

@@ -38,7 +38,7 @@ class _PendingordersState extends State<Pendingorders> {
             itemBuilder:(context,index){
               String address=(snapshot.data!as QuerySnapshot).docs[index]['address'];
               String date=(snapshot.data!as QuerySnapshot).docs[index]['date'];
-              String decription=(snapshot.data!as QuerySnapshot).docs[index]['description'];
+              String description=(snapshot.data!as QuerySnapshot).docs[index]['description'];
               String mobile=(snapshot.data!as QuerySnapshot).docs[index]['mobile'];
               String serve=(snapshot.data!as QuerySnapshot).docs[index]['serve'];
               String time=(snapshot.data!as QuerySnapshot).docs[index]['time'];
@@ -50,7 +50,7 @@ class _PendingordersState extends State<Pendingorders> {
                 onTap: (){
                   Navigator.pushNamed(context, MyRoutes.POrderDetails,
                   arguments: Receiverpendingscreenarg(
-                    address,date,decription,mobile,serve,time,type,uid,name
+                    address,date,description,mobile,serve,time,type,uid,name
                   ));
 
                 },
