@@ -38,18 +38,19 @@ class _PendingordersState extends State<Pendingorders> {
             itemBuilder:(context,index){
               String address=(snapshot.data!as QuerySnapshot).docs[index]['address'];
               String date=(snapshot.data!as QuerySnapshot).docs[index]['date'];
-              String decription=(snapshot.data!as QuerySnapshot).docs[index]['decription'];
+              String decription=(snapshot.data!as QuerySnapshot).docs[index]['description'];
               String mobile=(snapshot.data!as QuerySnapshot).docs[index]['mobile'];
               String serve=(snapshot.data!as QuerySnapshot).docs[index]['serve'];
               String time=(snapshot.data!as QuerySnapshot).docs[index]['time'];
               String type=(snapshot.data!as QuerySnapshot).docs[index]['type'];
               String uid=(snapshot.data!as QuerySnapshot).docs[index]['uid'];
+              String name=(snapshot.data!as QuerySnapshot).docs[index]['name'];
 
               return InkWell(
                 onTap: (){
                   Navigator.pushNamed(context, MyRoutes.POrderDetails,
                   arguments: Receiverpendingscreenarg(
-                    address,date,decription,mobile,serve,time,type,uid
+                    address,date,decription,mobile,serve,time,type,uid,name
                   ));
 
                 },
@@ -91,7 +92,7 @@ class _PendingordersState extends State<Pendingorders> {
                                         fontSize: 22),
                                   ),
 
-                                  Text("pqrs",
+                                  Text(name,
                                       textAlign: TextAlign.start,
                                       style:TextStyle(
                                         fontSize: 18,

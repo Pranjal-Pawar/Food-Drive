@@ -91,6 +91,10 @@ class _DonatenowState extends State<Donatenow> {
   final FirebaseAuth _auth=FirebaseAuth.instance;
   final CollectionReference _firestore= FirebaseFirestore.instance.collection("users");
   final FirebaseFirestore _firestore2=FirebaseFirestore.instance;
+  final CollectionReference _firestore1=FirebaseFirestore.instance.collection("users");
+  // Map<String,dynamic> map=_firestore1
+  //     .doc(_auth.currentUser!.uid)
+  //     .snapshots() as Map<String,dynamic>;
 
   late DateTime pickedDate;
   late TimeOfDay time1;
@@ -118,6 +122,7 @@ class _DonatenowState extends State<Donatenow> {
     String date = "${pickedDate.day}/${pickedDate.month}/${pickedDate.year}";
     String fromTime = "${time1.hour} : ${time1.minute}";
     String toTime = "${time2.hour} : ${time2.minute}";
+    // Map<String,dynamic>map = _firestore2.doc(_auth.currentUser!.uid).get()as Map<String,dynamic>;
 
     return Scaffold(
       backgroundColor:  Color.fromARGB(255, 248, 243, 247),
@@ -408,19 +413,19 @@ class _DonatenowState extends State<Donatenow> {
               ),
               child:TextButton(
                   onPressed: () async {
+
                     Map<String,dynamic>donorpendinglist={
                       "serve":_serve.text,
                       "mobile":_mobile.text,
-                      "decription":_description.text,
-                      "address":_description.text,
+                      "description":_description.text,
+                      "address":_address.text,
                       "date":date,
                       "time":fromTime,
                       "type": isVege?"Vegetarian":"NonVegetarian",
                       "uid":_auth.currentUser!.uid,
+                      "name":_auth.currentUser!.displayName.toString()
+
                       // "name":_auth.currentUser!.displayName.toString()
-
-
-
                     };
                     _firestore
                     .doc(_auth.currentUser!.uid)

@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:food_donation/utils/routes.dart';
-
 import '../utils/Receiverpendingscreenarg.dart';
 class POrderDetails extends StatefulWidget {
   const POrderDetails({Key? key}) : super(key: key);
@@ -10,6 +12,7 @@ class POrderDetails extends StatefulWidget {
 }
 
 class _POrderDetailsState extends State<POrderDetails> {
+  final FirebaseAuth _auth=FirebaseAuth.instance;
 
 
   @override
@@ -37,7 +40,7 @@ class _POrderDetailsState extends State<POrderDetails> {
                   Row(
                     children: [
                       Text(
-                        "Donar ABCD",
+                        "Donar ${arggs.name}",
                         style: TextStyle(
                             fontSize: 28,
                           color: Colors.cyan[50],
@@ -267,7 +270,93 @@ class _POrderDetailsState extends State<POrderDetails> {
 
             ),
             child:TextButton(
-                onPressed: () {},
+                onPressed: () async{
+                  String id1;
+                  FirebaseFirestore.instance
+                      .collection('receiverpendinglist')
+                      .where("uid",isEqualTo: arggs.uid)
+                  .where("name",isEqualTo: arggs.name)
+                  .where("mobile",isEqualTo: arggs.mobile)
+                  .where("type",isEqualTo: arggs.type)
+                  .where("description",isEqualTo: arggs.decription)
+                  .where("date",isEqualTo: arggs.date)
+                  .where("time",isEqualTo: arggs.time)
+                  .where("serve",isEqualTo: arggs.serve)
+                  .get()
+                  .then((value){
+                    id1=value.docs[0].id;
+                    FirebaseFirestore.instance
+                    .collection('receiverpendinglist')
+                    .doc(id1)
+                    .delete();
+                  });
+                  String id2;
+                  FirebaseFirestore.instance
+                  .collection("users")
+                  .doc(arggs.uid)
+                  .collection('donorpendinglist')
+                  .where("uid",isEqualTo: arggs.uid)
+                      .where("name",isEqualTo: arggs.name)
+                      .where("mobile",isEqualTo: arggs.mobile)
+                      .where("type",isEqualTo: arggs.type)
+                      .where("description",isEqualTo: arggs.decription)
+                      .where("date",isEqualTo: arggs.date)
+                      .where("time",isEqualTo: arggs.time)
+                      .where("serve",isEqualTo: arggs.serve)
+                  .get()
+                  .then((value){
+                    id2=value.docs[0].id;
+                    FirebaseFirestore.instance
+                    .collection('users')
+                    .doc(arggs.uid)
+                    .collection('donorpendinglist')
+                    .doc(id2)
+                    .delete();
+                  } );
+                  Map<String,dynamic> map={
+                    "serve":arggs.serve,
+                    "mobile":arggs.mobile,
+                    "description":arggs.decription,
+                    "address":arggs.address,
+                    "date":arggs.date,
+                    "time":arggs.time,
+                    "type": arggs.type,
+                    "duid":arggs.uid,
+                    "dname":arggs.name,
+                    "ruid":_auth.currentUser!.uid,
+                    "rname":_auth.currentUser!.displayName,
+
+                  };
+
+
+                  FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(_auth.currentUser!.uid)
+                  .collection('receiverconfirmlist')
+                  .add(map);
+                  Map<String,dynamic> map2={
+                    "serve":arggs.serve,
+                    "mobile":arggs.mobile,
+                    "description":arggs.decription,
+                    "address":arggs.address,
+                    "date":arggs.date,
+                    "time":arggs.time,
+                    "type": arggs.type,
+                    "duid":arggs.uid,
+                    "dname":arggs.name,
+                    "ruid":_auth.currentUser!.uid,
+                    "rname":_auth.currentUser!.displayName,
+                  };
+                  FirebaseFirestore.instance
+                  .collection('users')
+                  .doc(arggs.uid)
+                  .collection('donorconfirmlist')
+                  .add(map2);
+                  Navigator.pop(context);
+                  
+                  
+
+                },
                 child:Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[

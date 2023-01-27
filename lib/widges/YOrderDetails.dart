@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
-class YOrderDetails extends StatelessWidget {
+import 'package:food_donation/utils/Receiverconfirmscreenarg.dart';
+class YOrderDetails extends StatefulWidget {
   const YOrderDetails({Key? key}) : super(key: key);
 
   @override
+  State<YOrderDetails> createState() => _YOrderDetailsState();
+}
+
+class _YOrderDetailsState extends State<YOrderDetails> {
+  @override
   Widget build(BuildContext context) {
+    final args=ModalRoute.of(context)!.settings.arguments as Receiverconfirmscreenarg;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.cyan,
@@ -24,18 +31,16 @@ class YOrderDetails extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Donar ABCD",
+                        "Donar ${args.dname}",
                         style: TextStyle(
                             fontSize: 28,
                             color: Colors.cyan[50],
                             fontWeight:FontWeight.bold,
                             fontStyle: FontStyle.italic
                         ),
-                      ),
-                      SizedBox(
-                        width:150,
                       ),
                       IconButton(
                         onPressed:(){},
@@ -48,6 +53,7 @@ class YOrderDetails extends StatelessWidget {
                     ],
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         "Individual",
@@ -58,9 +64,7 @@ class YOrderDetails extends StatelessWidget {
                             fontStyle: FontStyle.italic
                         ),
                       ),
-                      SizedBox(
-                        width:210,
-                      ),
+
                       IconButton(
                         onPressed:(){},
                         icon:Icon(
@@ -99,7 +103,7 @@ class YOrderDetails extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "Non-Vegeterian",
+                            args.type,
                             style: TextStyle(
                               fontSize: 24,
                               color: Colors.black54,
@@ -130,7 +134,7 @@ class YOrderDetails extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "Serves nearly 4",
+                            "Serves nearly  ${args.serve}",
                             style: TextStyle(
                               fontSize: 24,
                               color: Colors.black54,
@@ -161,7 +165,7 @@ class YOrderDetails extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "Biryani",
+                            args.description,
                             style: TextStyle(
                               fontSize: 24,
                               color: Colors.black54,
@@ -192,7 +196,7 @@ class YOrderDetails extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "Flatno,Road,Station,City,State-Pincode",
+                            args.address,
                             maxLines: 2,
                             style: TextStyle(
                               fontSize: 24,
@@ -225,7 +229,7 @@ class YOrderDetails extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "01:26:34",
+                            args.date+", "+args.time,
                             style: TextStyle(
                               fontSize: 24,
                               color: Colors.black54,
