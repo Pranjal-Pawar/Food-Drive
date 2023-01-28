@@ -15,6 +15,7 @@ import 'package:food_donation/widges/Rprofile.dart';
 import 'package:food_donation/widges/YOrderDetails.dart';
 import 'package:food_donation/widges/Yorders.dart';
 import 'package:food_donation/DonorAuthentication/donarLP.dart';
+import 'package:food_donation/widges/ChatRoom.dart';
 import 'package:food_donation/widges/donaroptionpg.dart';
 import 'package:food_donation/widges/receiveroptionpg.dart';
 import 'package:food_donation/DonorAuthentication/signupD.dart';
@@ -66,6 +67,7 @@ class MyApp extends StatelessWidget {
                       MyRoutes.Rpastorder:(context)=>Rpastorder(),
                       MyRoutes.Dprofile:(context)=>Dprofile(),
                       MyRoutes.Dhistory:(context)=>Dhistory(),
+
                     },
                   )
               )

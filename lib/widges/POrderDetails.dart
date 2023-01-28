@@ -48,17 +48,7 @@ class _POrderDetailsState extends State<POrderDetails> {
                           fontStyle: FontStyle.italic
                         ),
                       ),
-                      SizedBox(
-                        width:150,
-                      ),
-                      IconButton(
-                        onPressed:(){},
-                        icon:Icon(
-                          Icons.call_sharp,
-                          size: 35,
-                          color: Colors.white,
-                        ),
-                      )
+
                     ],
                   ),
                   Row(
@@ -72,17 +62,7 @@ class _POrderDetailsState extends State<POrderDetails> {
                             fontStyle: FontStyle.italic
                         ),
                       ),
-                      SizedBox(
-                        width:210,
-                      ),
-                      IconButton(
-                        onPressed:(){},
-                        icon:Icon(
-                          Icons.message_sharp,
-                          size: 35,
-                          color: Colors.white,
-                        ),
-                      )
+
                     ],
                   )
                 ],

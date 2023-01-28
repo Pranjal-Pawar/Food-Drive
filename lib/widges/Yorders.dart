@@ -7,6 +7,7 @@ import 'package:food_donation/widges/Yorders_widget.dart';
 
 import '../utils/Receiverconfirmscreenarg.dart';
 import '../utils/routes.dart';
+import 'ChatRoom.dart';
 class Yorders extends StatefulWidget {
   const Yorders({Key? key}) : super(key: key);
 
@@ -18,6 +19,14 @@ class _YordersState extends State<Yorders> {
   final FirebaseAuth _auth=FirebaseAuth.instance;
   final CollectionReference firestore =FirebaseFirestore.instance.collection("users");
 
+  String chatRoomId(String user1,String user2){
+    if (user1[0].toLowerCase().codeUnits[0]>
+    user2.toLowerCase().codeUnits[0]){
+      return "$user1$user2";
+    }else{
+      return"$user2$user1";
+    }
+ }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -165,7 +174,9 @@ class _YordersState extends State<Yorders> {
                                   ),
                                   child:TextButton(
 
-                                      onPressed: () {},
+                                      onPressed: () async {
+                                        await FlutterPhoneDirectCaller.callNumber(mobile);
+                                      },
                                       child:Row(
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: <Widget>[
@@ -193,9 +204,21 @@ class _YordersState extends State<Yorders> {
                                     color: Colors.cyan,
                                   ),
                                   child:TextButton(
-                                      onPressed: ()
-                                        async {
-                                          await FlutterPhoneDirectCaller.callNumber(mobile);
+
+                                      onPressed: () {
+
+                                          String roomId=chatRoomId(
+                                            _auth.currentUser!.displayName!,dname
+
+                                          );
+                                          Navigator.push(context,
+                                          MaterialPageRoute(
+                                              builder: (_)=>
+                                          ChatRoom(
+                                              chatRoomId:roomId,userName: dname, userId: duid
+
+                                          )));
+
                                         },
 
                                       child:Row(

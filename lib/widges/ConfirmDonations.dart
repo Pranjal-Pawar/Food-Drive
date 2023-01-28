@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:food_donation/Donations/condonations.dart';
 
+import 'ChatRoom.dart';
 import 'donations_widget.dart';
 
 class ConfirmDonations extends StatefulWidget {
@@ -16,6 +17,14 @@ class ConfirmDonations extends StatefulWidget {
 class _ConfirmDonationsState extends State<ConfirmDonations> {
   final FirebaseAuth _auth=FirebaseAuth.instance;
   final CollectionReference firestore=FirebaseFirestore.instance.collection("users");
+  String chatRoomId(String user1,String user2){
+    if (user1[0].toLowerCase().codeUnits[0]>
+        user2.toLowerCase().codeUnits[0]){
+      return "$user1$user2";
+    }else{
+      return"$user2$user1";
+    }
+  }
   @override
   Widget build(BuildContext context) {
     final dummyList=List.generate(5, (index) => ConfirmDonationsList.donations[0]);
@@ -203,7 +212,19 @@ class _ConfirmDonationsState extends State<ConfirmDonations> {
                                           color: Colors.cyan,
                                         ),
                                         child:TextButton(
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              String roomId=chatRoomId(
+                                                  _auth.currentUser!.displayName!,rname
+
+                                              );
+                                              Navigator.push(context,
+                                                  MaterialPageRoute(
+                                                      builder: (_)=>
+                                                          ChatRoom(
+                                                              chatRoomId:roomId,userName: rname, userId: ruid
+
+                                                          )));
+                                            },
                                             child:Row(
                                               mainAxisAlignment: MainAxisAlignment.center,
                                               children: <Widget>[

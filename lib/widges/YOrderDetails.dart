@@ -45,14 +45,7 @@ class _YOrderDetailsState extends State<YOrderDetails> {
                             fontStyle: FontStyle.italic
                         ),
                       ),
-                      IconButton(
-                        onPressed:(){},
-                        icon:Icon(
-                          Icons.call_sharp,
-                          size: 35,
-                          color: Colors.white,
-                        ),
-                      )
+
                     ],
                   ),
                   Row(
@@ -68,14 +61,7 @@ class _YOrderDetailsState extends State<YOrderDetails> {
                         ),
                       ),
 
-                      IconButton(
-                        onPressed:(){},
-                        icon:Icon(
-                          Icons.message_sharp,
-                          size: 35,
-                          color: Colors.white,
-                        ),
-                      )
+
                     ],
                   )
                 ],
